@@ -1,7 +1,7 @@
 CMSMonolog
 ============
 
-This project embeds [Monolog 1.10.x-dev](https://github.com/Seldaek/monolog) into CMS Made Simple.  From the Minify website:
+This project embeds [Monolog 1.10.x-dev](https://github.com/Seldaek/monolog) into CMS Made Simple.  From the Monolog website:
 
 > Monolog sends your logs to files, sockets, inboxes, databases and various web services. See the complete list of handlers below. Special handlers allow you to build advanced logging strategies.
 
