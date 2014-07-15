@@ -70,10 +70,10 @@ SCREENSHOTS
 -------------------
 
 ### Settings Tab
-![Settings Tab](https://www.diigo.com/item/p/rbepedczccarocbcbzbedbsooa)
+![Settings Tab](http://i.imgur.com/ao92TAr.png)
 
 ### Log Viewers
-![Log Viewer](https://www.diigo.com/item/p/rbepedczccarocoedzbedbsopa)
+![Log Viewer](http://i.imgur.com/ao92TAr.png)
 
 
 
