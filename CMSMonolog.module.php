@@ -41,7 +41,10 @@
 use \Monolog\Logger;
 use \Monolog\Formatter\LineFormatter;
 
-require_once __DIR__."/vendor/autoload.php";
+if ( !class_exists('Monolog') && is_file(__DIR__."/vendor/autoload.php") ) {
+    require_once __DIR__."/vendor/autoload.php";
+}
+
 require_once __DIR__."/PDOHandler.class.php";
 require_once __DIR__."/MLog.class.php";
 
@@ -49,9 +52,9 @@ require_once __DIR__."/MLog.class.php";
 class CMSMonolog extends CMSModule {
     var $channels = array();
 
-    function GetName()                              { return 'CMSMonolog';                       }
+    function GetName()                              { return 'CMSMonolog';                    }
     function GetFriendlyName()                      { return $this->Lang('friendlyname');     }
-    function GetVersion()                           { return '0.2.0';                         }
+    function GetVersion()                           { return '0.3.0';                         }
     function GetHelp()                              { return $this->Lang('help');             }
     function GetAuthor()                            { return 'Mike Crowe';                    }
     function GetAuthorEmail()                       { return 'drmikecrowe@gmail.com';         }
@@ -93,6 +96,7 @@ class CMSMonolog extends CMSModule {
     }
 
     function __construct() {
+        parent::__construct();
         $this->pdo = null;
         ;
     }
@@ -161,7 +165,11 @@ EOS
                 $dbname = $config->offsetGet('db_name');
                 $user = $config->offsetGet('db_username');
                 $password = $config->offsetGet('db_password');
-                $pdo = new PDO("mysql:host=$host;dbname=$dbname",$user,$password);
+                $port = $config->offsetGet("db_port");
+                if ( $port && $port > '' )
+                    $port = "port=$port;";
+                $connect = "mysql:host=$host;${port}dbname=$dbname";
+                $pdo = new PDO($connect,$user,$password);
                 $this->pdo_handler = new PDOHandler($pdo,$level);
             }
             $logger = new Logger($channel);

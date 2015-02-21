@@ -23,21 +23,19 @@ $where = array();
  */
 
 /* ordering */
-if (isset($_GET['iSortCol_0'])) {
-	for ($i = 0; $i < intval($_GET['iSortingCols']); $i++) {
-		if ($_GET['bSortable_' . intval($_GET['iSortCol_' . $i])] == "true") {
-			$order_by = "ORDER BY ".$aColumns[intval($_GET['iSortCol_' . $i])] ." ". $_GET['sSortDir_' . $i];
-			break;
-		}
-	}
+if (isset($_GET['order'])) {
+    $order = $_GET['order'];
+	$order_by = "ORDER BY ".$aColumns[intval($order[0]['column'])] ." ". $order[0]['dir'];
 }
 
 $levels = Logger::getLevels();
 
 /* Individual column filtering */
 for ($i = 0; $i < count($aColumns); $i++) {
-	if (isset($_GET['bSearchable_' . $i]) && $_GET['bSearchable_' . $i] == "true" && $_GET['sSearch_' . $i] != '') {
-		$field = $_GET['sSearch_' . $i];
+    $column = $_GET['columns'][$i];
+	if ($column['searchable']) {
+		$field = $column['search']['value'];
+        if ( empty($field) ) continue;
 		switch ( $aColumns[$i] ) {
             case "channel":
                 $where[] = "channel LIKE '%".$field."%'";
@@ -53,7 +51,7 @@ for ($i = 0; $i < count($aColumns); $i++) {
                 $where[] = "`time` LIKE '%".$field."%'";
                 break;
 			default:
-				$query->filterBy($aColumns[$i], "%$field%",Criteria::LIKE);
+                //$where[] = "`".$aColumns[$i]."` LIKE \"%$field%\"";
 				break;
 		}
 	}
@@ -67,19 +65,18 @@ else
 $sLimit = 50;
 $sPage = 1;
 $sOffset = "";
-if (isset($_GET['iDisplayStart']) && $_GET['iDisplayLength'] != '-1') {
-    $sLimit = $_GET['iDisplayLength'];
-    $sPage = round(($_GET['iDisplayStart']-1)/$sLimit,0);
+if (isset($_GET['length']) && $_GET['iDisplayLength'] != '-1') {
+    $sLimit = $_GET['length'];
+    $sPage = round(($_GET['start'])/$sLimit,0);
     if ( $sPage > 0 ) {
-        $sOffset = "OFFSET $sPage";
+        $sOffset = "OFFSET ".$_GET['start'];
     }
 }
 $limit = "LIMIT $sLimit $sOffset";
 
-
 $prefix = cms_db_prefix();
 $sql = <<<EOS
-SELECT *
+SELECT SQL_CALC_FOUND_ROWS *
 FROM `{$prefix}monolog`
 $swhere
 $order_by
@@ -90,7 +87,7 @@ $levels = array_flip(Logger::getLevels());
 
 $data = $db->GetArray($sql);
 $aaData = array();
-if ( data ) {
+if ( $data ) {
     foreach ($data as $items) {
         $one = array();
         foreach ($headers as $k => $v) {
@@ -107,16 +104,16 @@ if ( data ) {
         }
         $aaData[] = $one;
     }
+    $row = $db->GetRow("SELECT FOUND_ROWS()");
+    $iFilteredTotal = $row['FOUND_ROWS()'];
     $row = $db->GetRow("SELECT COUNT(id) FROM `{$prefix}monolog`");
     $iTotal = $row['COUNT(id)'];
-    $row = $db->GetRow("SELECT COUNT(id) FROM `{$prefix}monolog` $swhere");
-    $iFilteredTotal = $row['COUNT(id)'];
 } else {
     $iTotal = 0;
     $iFilteredTotal = 0;
 }
 
-$jsonArr = array("iTotalRecords" => $iFilteredTotal, "iTotalDisplayRecords" => $iTotal, "aaData" => $aaData);
+$jsonArr = array("recordsFiltered" => $iFilteredTotal, "recordsTotal" => $iTotal, "data" => $aaData);
 
 echo json_encode($jsonArr);
 ob_end_flush();

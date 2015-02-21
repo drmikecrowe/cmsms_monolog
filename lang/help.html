@@ -1,0 +1,87 @@
+<h3>Module
+    Purpose:<br>
+</h3>
+<p>This module is for developers only.&nbsp; <br></p>
+<p>Integrates https://github.com/Seldaek/monolog into CMS Made Simple</p>
+<h3>Installation</h3>
+<p>Post install, Monolog must be installed using <a href="https://getcomposer.org/">Composer</a>.  Two choices:</p>
+<ol>
+    <li>In module directory (/modules/CMSMonolog)<br>
+        <pre>cd modules/CMSMonolog
+composer update</pre>
+    </li>
+    <li>Globally, loaded via config.php<br>
+<pre> composer require monolog/monolog </pre><br>
+And in config.php:<br><pre>require_once __DIR__."/vendor/autoload.php";</pre>
+    </li>
+</ol>
+<h3>How Do I Use It</h3>
+<p>After installation, logs are viewed in Site Admin -&gt; CMS Monolog.</p>
+<p>Logging is provided via the MLog static functions (levels are defined per Monolog)</p>
+<p>&nbsp;</p>
+<p>
+<table border="1"
+       cellpadding="2" cellspacing="2">
+    <tbody>
+    <tr>
+        <th>Level<br></th>
+        <th>Method<br></th>
+        <th>Parameters<br></th>
+    </tr>
+    <tr>
+        <td>Debug</td>
+        <td>MLog::d</td>
+        <td>(<em>channel, debug message, variable1, variable2, ...</em>);
+        </td>
+    </tr>
+    <tr>
+        <td>Info</td>
+        <td>MLog::i</td>
+        <td>(<em>channel, debug message, variable1, variable2, ...</em>);
+        </td>
+    </tr>
+    <tr>
+        <td>Warning</td>
+        <td>MLog::w</td>
+        <td>(<em>channel, debug message, variable1, variable2, ...</em>);
+        </td>
+    </tr>
+    <tr>
+        <td>Error</td>
+        <td>MLog::e</td>
+        <td>(<em>channel, debug message, variable1, variable2, ...</em>);
+        </td>
+    </tr>
+    <tr>
+        <td>Critical</td>
+        <td>MLog::c</td>
+        <td>(<em>channel, debug message, variable1, variable2, ...</em>);
+        </td>
+    </tr>
+    <tr>
+        <td>Alert</td>
+        <td>MLog::a</td>
+        <td>(<em>channel, debug message, variable1, variable2, ...</em>);
+        </td>
+    </tr>
+    </tbody>
+</table>
+</p>
+<p>&nbsp;</p>
+<p>Example:
+</p>
+
+<pre>MLog::d(__METHOD__, "Starting process, parameters: ", $params);</pre>
+<br>
+<p>If "Email on Error" is selected in settings (and your email is specified), then Error, Critical and Alert levels
+    generate emails.</p>
+<h3>What Parameters Does It Take</h3>
+<p>None</p>
+<h3>Support</h3>
+<p>As per the GPL, this software is provided as-is. Please read the text of the license for the full disclaimer.</p>
+<h3>Copyright and License</h3>
+<p>Copyright © 2015, Mike Crowe<span class="Apple-converted-space">&nbsp;</span><a href="mailto:drmikecrowe@gmail.com">
+    &lt;drmikecrowe@gmail.com&gt;</a>. All Rights Are Reserved.</p>
+<p>This module has been released under the<span class="Apple-converted-space">&nbsp;</span><a
+        href="http://www.gnu.org/licenses/licenses.html#GPL">GNU Public License</a>. You must agree to this license
+    before using the module.</p>

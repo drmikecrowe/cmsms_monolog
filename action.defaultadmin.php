@@ -13,8 +13,8 @@ if (isset($params["tab"])) $return_tab=$params["tab"];
 
 $tabs = array();
 
-$tabs[] = 'settings';
 $tabs[] = 'logbrowser';
+$tabs[] = 'settings';
 
 if ( array_key_exists("tab_error", $params) && $params['tab_error']) {
     echo $this->ShowErrors($params['tab_error']);

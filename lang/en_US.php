@@ -1,6 +1,6 @@
 <?php
 $lang['friendlyname'] = 'CMS Monolog';
-$lang['postinstall'] = 'CMS Monolog has now been installed.';
+$lang['postinstall'] = 'IMPORTANT: See help for Monolog installation instructions';
 $lang['postuninstall'] = 'CMS Monolog has now been uninstalled.';
 $lang['really_uninstall'] = 'Really? Are you sure
 you want to unsinstall this fine module?';
@@ -20,16 +20,19 @@ $lang['title_settings'] = 'Settings';
 
 
 $lang['changelog'] = '<ul>
+<li>0.3.0 - 21 Feb 2015
+    <ul>
+    <li>Upgraded to latest datatables</li>
+    <li>Now using bower for libraries</li>
+    <li>Adding clear filter/refresh functions to main display</li>
+    <li>Adding clear-log function in settings tab</li>
+    <li>Adding support for Monolog being installed by composer for project (vs. local to this library)</li>
+    <li>Including support for database port in config</li>
+    <li>New MLog functions (see help)</li>
+    <li>All MLog functions now take a variable number of parameters (see help for example)</li>
+    <li>Better backtrace support added</li>
+    </ul>
+</li>
 <li>Version 0.2.0 - 4 July 2014. Database Logging release.</li>
 </ul>';
-$lang['help'] = '<h3>What Does This Do?</h3>
-<p>Integrates https://github.com/Seldaek/monolog into CMS Made Simple</p>
-<h3>How Do I Use It</h3>
-<p>[FIX-ME!]</p>
-<h3>What Parameters Does It Take</h3>
-<p>[FIX-ME!]</p>
-<h3>Support</h3>
-<p>As per the GPL, this software is provided as-is. Please read the text of the license for the full disclaimer.</p>
-<h3>Copyright and License</h3>
-<p>Copyright &copy; 2014, Mike Crowe <a href="mailto:drmikecrowe@gmail.com">&lt;drmikecrowe@gmail.com&gt;</a>. All Rights Are Reserved.</p>
-<p>This module has been released under the <a href="http://www.gnu.org/licenses/licenses.html#GPL">GNU Public License</a>. You must agree to this license before using the module.</p>';
+$lang['help'] = file_get_contents(__DIR__ . '/help.html');

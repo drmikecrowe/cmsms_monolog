@@ -15,11 +15,11 @@ if (isset($params["email_on_warning"])) {
     $dirty = true;
 }
 
-if (isset($params["email_on_error"])) {
-    $this->SetPreference("email_on_error",$params["email_on_error"]);
+if (isset($params["use_database_default"])) {
+    $this->SetPreference("use_database_default",$params["use_database_default"]);
     $dirty = true;
 } else {
-    $this->SetPreference("email_on_error",false);
+    $this->SetPreference("use_database_default",false);
     $dirty = true;
 }
 

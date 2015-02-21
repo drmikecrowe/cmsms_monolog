@@ -41,6 +41,10 @@
 <div class="pageoverflow">
     <p class="pagetext">&nbsp;</p>
     <p class="pageinput">{$settingssubmit}</p>
+    <p class="pageinput">
+        {$clearbutton}
+    </p>
+
 </div>
 
 {$formend}
