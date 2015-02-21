@@ -73,7 +73,7 @@ SCREENSHOTS
 ![Settings Tab](http://i.imgur.com/ao92TAr.png)
 
 ### Log Viewers
-![Log Viewer](http://i.imgur.com/ao92TAr.png)
+![Log Viewer](http://i.imgur.com/gjVxm1e.png)
 
 
 
