@@ -1,7 +1,7 @@
 CMSMonolog
 ============
 
-This project embeds [Monolog 1.10.x-dev](https://github.com/Seldaek/monolog) into CMS Made Simple.  From the Monolog website:
+This project embeds [Monolog](https://github.com/Seldaek/monolog) into CMS Made Simple.  From the Monolog website:
 
 > Monolog sends your logs to files, sockets, inboxes, databases and various web services. See the complete list of handlers below. Special handlers allow you to build advanced logging strategies.
 
@@ -12,7 +12,7 @@ For support, please submit [an issue](https://github.com/drmikecrowe/cmsms_monol
 TARGET AUDIENCE
 ================
 
-This module will benefit developers.  Standard CMSMS installations will NOT benefit from this, as standard CMSMS logs will go to Monolog.
+This module will benefit developers.  Standard CMSMS installations will NOT benefit from this, as standard CMSMS logs will not go to Monolog.
 
 CAUTION
 ========
@@ -38,32 +38,12 @@ FEATURES
 USAGE
 --------
 
-### Method #1 (local instance):
+### Static Methods:
 
-        use Monolog\Logger;
+        MLog::d(channel, debug message, variable1, variable2, ...);
+    example
+        MLog::i(__METHOD__,"This is my info logging message",$params);
 
-        /** @var CMSMonolog $mlog */
-        $mlog = cmsms()->GetModuleInstance("CMSMonolog");
-        if ( $mlog ) {
-            $level = (IS_DEV ? Logger::DEBUG : Logger::INFO);
-            $this->generalLogger = $mlog->GetDatabaseLogger($this->GetName(),$level);
-        }
-
-        (snip)
-
-        $this->generalLogger->addDebug(__METHOD__,"This is my debug logging message");
-        or
-        $this->generalLogger->addWarning(__METHOD__,"This is my warning logging message");
-
-### Method #2 (Static Class):
-
-        MLog::d($channel,$message,$context);          // add a debug message
-        or
-        MLog::i("General","This is my info logging message,__METHOD__);
-
-### Method #3 (Replace CMSMS audit function):
-
-        MLog::audit($uid, $this->GetName(), "User $username/$uid was created from referral $sponsorname");
 
 
 SCREENSHOTS
